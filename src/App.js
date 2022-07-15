@@ -5,7 +5,13 @@ const { Search } = Input
 const { Option } = Select
 
 function App() {
-  const { users, params, setGender, setKeyword, resetFilter, paginationChange } = useUser()
+  const { users,
+    gender,
+    setGender,
+    keyword,
+    setKeyword,
+    resetFilter,
+    paginationChange } = useUser()
 
   const userColumns = [
     {
@@ -47,8 +53,8 @@ function App() {
     <div className='app'>
       <h1>User List</h1>
       <div className='app__filter'>
-        <Search placeholder='Search by username, name, email' value={params.keyword} onChange={(e) => setKeyword(e.target.value)} />
-        <Select defaultValue='' value={params.gender} onChange={(value) => setGender(value)}>
+        <Search placeholder='Search by username, name, email' value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+        <Select defaultValue='' value={gender} onChange={(value) => setGender(value)}>
           <Option value=''>All</Option>
           <Option value='female'>Female</Option>
           <Option value='male'>Male</Option>
@@ -70,7 +76,7 @@ function App() {
 
       </div>
       <div className='app__pagination'>
-        <Pagination defaultCurrent={1} total={100} onChange={paginationChange} showSizeChanger={true} />
+        <Pagination defaultCurrent={1} total={100} onChange={paginationChange} showSizeChanger={true} defaultPageSize={5} pageSizeOptions={[5, 10, 20, 50,]} />
       </div>
     </div>
   )

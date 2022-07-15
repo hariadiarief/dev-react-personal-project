@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import API from "Services/API";
+import useDebounce from "./useDebounce";
 
 const useUser = () => {
     const [users, setUsers] = useState({
@@ -8,16 +9,23 @@ const useUser = () => {
         items: [],
     })
 
-    const [params, setParams] = useState({
+    const [gender, setGender] = useState('')
+    const [keyword, setKeyword] = useState('')
+    const debouncedSearch = useDebounce(keyword, 500);
+
+    const [pagination, setPagination] = useState({
         page: 1,
-        pageSize: 10,
-        results: 10,
-        gender: '',
-        keyboard: '',
+        pageSize: 5,
+        results: 5,
     })
 
-
     const fetchUserData = () => {
+        let params = Object.fromEntries(Object.entries({
+            gender,
+            keyword,
+            ...pagination
+        }).filter(([_, v]) => v));
+
         setUsers((prevState) => ({ ...prevState, isLoading: true }))
         API.get(`/?${queryString.stringify(params)}`)
             .then((response) => {
@@ -39,25 +47,10 @@ const useUser = () => {
             .finally(() => setUsers((prevState) => ({ ...prevState, isLoading: false })))
     }
 
-    useEffect(() => fetchUserData(), [params])
-
-    const setGender = (value) => {
-        setParams((prevState) => ({
-            ...prevState,
-            gender: value
-        }))
-    }
-
-    const setKeyword = (value) => {
-        setParams((prevState) => ({
-            ...prevState,
-            keyboard: value
-        }))
-    }
+    useEffect(fetchUserData, [gender, pagination, debouncedSearch])
 
     const paginationChange = (page, pageSize) => {
-
-        setParams((prevState) => ({
+        setPagination((prevState) => ({
             ...prevState,
             page,
             pageSize,
@@ -66,19 +59,20 @@ const useUser = () => {
     }
 
     const resetFilter = () => {
-        setParams({
+        setGender('')
+        setKeyword('')
+        setPagination({
             page: 1,
-            pageSize: 10,
-            results: 10,
-            gender: '',
-            keyboard: '',
+            pageSize: 5,
+            results: 5,
         })
     }
 
     return {
         users,
-        params,
+        gender,
         setGender,
+        keyword,
         setKeyword,
         resetFilter,
         paginationChange

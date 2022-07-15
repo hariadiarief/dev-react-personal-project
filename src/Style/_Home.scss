@@ -1,1 +1,51 @@
-.app {}
+.app {
+    padding: 25px 10px;
+
+    @include for-size(md) {
+        padding: 50px 100px;
+    }
+}
+
+.app__filter {
+    display: flex;
+    flex-direction: column;
+
+    >* {
+        width: 100%;
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        &:last-child {
+            margin-bottom: 16px;
+        }
+    }
+
+    @include for-size(md) {
+        flex-direction: row;
+
+        >:first-child {
+            width: 350px !important;
+        }
+
+        >:not(:first-child) {
+            margin-left: 12px;
+            width: 150px
+        }
+    }
+}
+
+.app__table {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.app__pagination {
+    display: flex;
+
+    >ul {
+        margin-top: 25px;
+        margin-left: auto;
+    }
+}

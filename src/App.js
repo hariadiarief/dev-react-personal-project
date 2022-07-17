@@ -1,17 +1,21 @@
+import { useContext } from 'react'
 import { Button, Table, Input, Select, Pagination } from 'antd'
-import useUser from 'Hook/useUser'
+import { UserContext } from 'Context/UserContext'
+
 
 const { Search } = Input
 const { Option } = Select
 
 function App() {
-  const { users,
+  const {
+    users,
     gender,
     setGender,
     keyword,
     setKeyword,
     resetFilter,
-    paginationChange } = useUser()
+    paginationChange
+  } = useContext(UserContext)
 
   const userColumns = [
     {

@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import queryString from 'query-string'
 import API from "Services/API";
-import useDebounce from "./useDebounce";
+import useDebounce from "Hook/useDebounce";
 
-const useUser = () => {
+export const UserContext = createContext()
+export const UserConsumer = UserContext.Consumer
+
+const UserContextProvider = ({ children }) => {
     const [users, setUsers] = useState({
         isLoading: false,
         items: [],
@@ -68,16 +71,21 @@ const useUser = () => {
         })
     }
 
-    return {
-        users,
-        gender,
-        setGender,
-        keyword,
-        setKeyword,
-        resetFilter,
-        paginationChange
-    }
+    return (
+        <UserContext.Provider
+            value={{
+                users,
+                gender,
+                setGender,
+                keyword,
+                setKeyword,
+                resetFilter,
+                paginationChange
+            }}>
+            {children}
+        </UserContext.Provider>
+    )
 
 }
 
-export default useUser
+export default UserContextProvider

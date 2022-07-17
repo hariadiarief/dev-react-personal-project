@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import UserContextProvider from 'Context/UserContext'
+
+
 import './Style/Main.scss';
 import 'antd/dist/antd.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <UserContextProvider>
+    <App />
+  </UserContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

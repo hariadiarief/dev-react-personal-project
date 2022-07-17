@@ -14,7 +14,8 @@ function App() {
     keyword,
     setKeyword,
     resetFilter,
-    paginationChange
+    paginationChange,
+    pagination
   } = useContext(UserContext)
 
   const userColumns = [
@@ -80,7 +81,7 @@ function App() {
 
       </div>
       <div className='app__pagination'>
-        <Pagination defaultCurrent={1} total={100} onChange={paginationChange} showSizeChanger={true} defaultPageSize={5} pageSizeOptions={[5, 10, 20, 50,]} />
+        <Pagination defaultCurrent={1} total={100} onChange={paginationChange} showSizeChanger={true} current={pagination.page} pageSize={pagination.pageSize} defaultPageSize={5} pageSizeOptions={[5, 10, 20, 50,]} />
       </div>
     </div>
   )

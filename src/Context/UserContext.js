@@ -80,6 +80,7 @@ const UserContextProvider = ({ children }) => {
                 keyword,
                 setKeyword,
                 resetFilter,
+                pagination,
                 paginationChange
             }}>
             {children}

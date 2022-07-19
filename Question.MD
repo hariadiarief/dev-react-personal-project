@@ -81,23 +81,27 @@ console.log(adi.showOff())
 
 ## 4. Imagine refactoring an ES5 application to use ES2015, how would you go about it?
 
-make test cases first, and implement unit-testing to ensure new apps will be running well after refactored
+ - make test cases first 
+ - add unit-testing to ensure new apps will be running well after refactored
+ - dont forget to implement formater and apply code review
 
 ## 5. Give an example of how you structure applications with design patterns using closure and modules
 
--
+Honestly, I am not familiar with closures and modules. I did a little bit of research, and based on what i understand : 
+- module pattern would need to be invoked immediately. Module patterns are usually used for code organisation. What you have here instead is an object factory.
+- Closures are used by the (revealing) module pattern (and others) to achieve the encapsulation of private state. A closure is created whenever a function is defined. They are a language feature of JavaScript to make working with functions easier.
 
 ## 6. What are your preferred ways of testing your web application?
 
-using Jest
+using Jest or React Testing Library
 
 ## 7. Which web server do you use? Why? Explain pros and cons of your choice.
-
--
+Before you decide which hosting service to use, I recommend discussing the details and functionality of your website. Understanding how your website will be developed and how supportive your development firm is will help you decide what hosting firm to use. If you already have a website, discuss with your developer the traffic and bandwidth to understand what you may need for growth. Once you are educated on the type of structure that will be used to build your website or needed to grow your website, you can research the firms recommended by your developer as well as hosts you may already have in mind. You may need to graduate from a shared hosting service, which leads us to looking inward.
 
 ## 8. What is your preferred production deployment process?
-
-with [Trunk Based Development](https://trunkbaseddevelopment.com/)
+- before deploying make sure version control / Git Scm alreay mature, we can also implement approach with [Trunk Based Development](https://trunkbaseddevelopment.com/)
+- then we can implement CI/CD for implement automation deployment / testing
+- and make sure we choose secure server
 
 ## 9. Give an example of clean README.md documentation.
 
